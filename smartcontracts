@@ -1,32 +1,44 @@
-//SPDX-License-Identifier:MIT
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-
-pragma solidity 0.8.18;
-
-contract Counter{
-  address public admin;
-  uint withdrawlimit;
-  event wl(uint value);
-  constructor(){
-  admin=msg.sender;
-  }
-  modifier onlyadmin(){
-    require(msg.sender==admin,"only the admin call the function");
-    _;
-  }
-    function setwithdrawllimit(uint limit)public onlyadmin{
-      withdrawlimit=limit;
-      emit wl(withdrawlimit);
+contract voting{
+    uint public x;//number of candidates
+    uint public winner;//I have named candidates as numbers so winner is also a number.
+    uint j=0;
+    constructor(uint _x){
+      x=_x;
     }
-  function getwl() view public returns(uint){
-return withdrawlimit;
-  }
-    function withdrawfunds(uint amount)public view {
-     require(amount<=withdrawlimit,"exceeded withdrawl limit.");
-    
-
-    }
+    address[] add;
+    uint[] count;
+    //modifier newvoter(address _y){
+     //   for(uint i=0;i<j-1;i++)
+      //  require(msg.sender!=add[i]);
+    //_;
+    //}
+    mapping (uint=>string) public candinames;
+    mapping(uint=>uint) public votes;
+   // function iteration() public{
+    //  for(uint i=0;i<x;i++){
+    //  function namingcandi(string memory _name) public{
+     //    candinames[i]=_name;
+      //}
+      //}
+    //}
+     function votenow(uint _y)external {
+      votes[_y]+=1;
+}
+uint max;
+uint maxi;
+function declarewinner() external  {
+for(uint i=0;i<x;i++){
+if(max<votes[i]){
+    max=votes[i];
+    maxi=i;
+}
+}
+winner=maxi;
 
 }
+
 
 
