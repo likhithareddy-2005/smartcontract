@@ -2,35 +2,22 @@
 pragma solidity ^0.8.0;
 
 contract voting{
-    uint public x;//number of candidates
+    uint x;//(number of candidates) it is given while deploying the contract in constructor.
     uint public winner;//I have named candidates as numbers so winner is also a number.
     uint j=0;
     constructor(uint _x){
       x=_x;
     }
-    address[] add;
     uint[] count;
-    //modifier newvoter(address _y){
-     //   for(uint i=0;i<j-1;i++)
-      //  require(msg.sender!=add[i]);
-    //_;
-    //}
-    mapping (uint=>string) public candinames;
-    mapping(uint=>uint) public votes;
-   // function iteration() public{
-    //  for(uint i=0;i<x;i++){
-    //  function namingcandi(string memory _name) public{
-     //    candinames[i]=_name;
-      //}
-      //}
-    //}
+    mapping(uint=>uint) public votes;//with this function we can know the number of votes that voter presently has
      function votenow(uint _y)external {
-      votes[_y]+=1;
+      votes[_y+1]+=1;
 }
-uint max;
-uint maxi;
+
 function declarewinner() external  {
-for(uint i=0;i<x;i++){
+  uint max=votes[1];
+uint maxi;
+for(uint i=2;i<=x;i++){
 if(max<votes[i]){
     max=votes[i];
     maxi=i;
@@ -39,6 +26,10 @@ if(max<votes[i]){
 winner=maxi;
 
 }
+
+
+}
+
 
 
 
